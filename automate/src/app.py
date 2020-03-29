@@ -1,5 +1,5 @@
-import src
+from automate.src.common.unite import Unite
 
-def run():
-    auto1 = src.Automate('Robert')
-    print(auto1.name)
+def run(num_unite):
+    u = Unite(num_unite)
+    # print(u.num_unite)
