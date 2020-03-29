@@ -1,0 +1,21 @@
+<p>charts works!</p>
+<mat-form-field>
+  <mat-label>Unité</mat-label>
+  <mat-select>
+    <mat-option *ngFor="let food of foods" [value]="food.value">
+      {{food.viewValue}}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+
+<mat-form-field>
+  <mat-label>Automates</mat-label>
+  <mat-select>
+    <mat-option *ngFor="let food of foods" [value]="food.value">
+      {{food.viewValue}}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+
+
+<temperature></temperature>
