@@ -39,3 +39,5 @@ yarn-error.log
 /modules/rollup-test/dist/
 
 *.pyc
+
+back/env/
