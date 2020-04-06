@@ -1,5 +1,4 @@
-from app import app
-import pymysql.cursors
+import pymysql
 
-# Connect to the database
-connection = pymysql.connect(host='cloudnantespaul.freeboxos.fr', port=3390, user='ynov_devops', password='ynov_devops', db='ynov_devops')
+def connect():
+	return pymysql.connect(host='cloudnantespaul.freeboxos.fr', port=3390, user='ynov_devops', password='ynov_devops', db='ynov_devops')
