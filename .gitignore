@@ -40,4 +40,4 @@ yarn-error.log
 
 *.pyc
 
-back/env/
+back/venv/
