@@ -1,6 +1,7 @@
 from app import app
-from flask import jsonify, flash, request
+from flask import flash, request
 from config import connect
+import json
 
 @app.route('/automates', methods=['GET'])
 def get_automates():
@@ -12,21 +13,13 @@ def get_automates():
 			with connection.cursor() as cursor:
 				sql = "SELECT * FROM `automate` where unite_id = %s"
 				cursor.execute(sql, num_unite)
-				res = {
-					'data' : cursor.fetchall(),
-					'status' : 200
-				}
-				return jsonify(res)
+				return json.dumps(cursor.fetchall())
 		finally:
 			if cursor != None:
 				cursor.close()
 			if connection != None:
 				connection.close()
-	res = {
-		'data' : [],
-		'status' : 204
-	}
-	return jsonify(res)
+	return json.dumps({})
 
 @app.route('/automate/data', methods=['GET'])
 def get_data():
@@ -38,18 +31,10 @@ def get_data():
 			with connection.cursor() as cursor:
 				sql = "SELECT * FROM `automate` where automate_id = %s AND date < now() AND date > %s"
 				cursor.execute(sql, (num_automate, date_fin))
-				res = {
-					'data' : cursor.fetchall(),
-					'status' : 200
-				}
-				return jsonify(res)
+				return json.dumps(cursor.fetchall())
 		finally:
 			if cursor != None:
 				cursor.close()
 			if connection != None:
 				connection.close()
-	res = {
-		'data' : [],
-		'status' : 204
-	}
-	return jsonify(res)
+	return json.dumps({})
