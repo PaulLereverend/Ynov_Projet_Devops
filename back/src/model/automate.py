@@ -1,12 +1,7 @@
 from app import app
-from flask import flash, request
+from flask import request
 from config import connect
-import datetime
-import json
-
-def converter(o):
-    if isinstance(o, (datetime.date, datetime.datetime)):
-        return o.timestamp()
+from globalFunct import toJSON
 
 @app.route('/automates', methods=['GET'])
 def get_automates():
@@ -18,13 +13,13 @@ def get_automates():
 			with connection.cursor() as cursor:
 				sql = "SELECT * FROM `automate` where unite_id = %s"
 				cursor.execute(sql, num_unite)
-				return json.dumps(cursor.fetchall(), default=converter)
+				return toJSON(cursor.fetchall())
 		finally:
 			if cursor != None:
 				cursor.close()
 			if connection != None:
 				connection.close()
-	return json.dumps({})
+	return toJSON({})
 
 
 @app.route('/automate/data', methods=['GET'])
@@ -37,10 +32,10 @@ def get_data():
 			with connection.cursor() as cursor:
 				sql = "SELECT * FROM `automate` where automate_id = %s AND date < now() AND date > %s"
 				cursor.execute(sql, (num_automate, date_fin))
-				return json.dumps(cursor.fetchall(), default=converter)
+				return toJSON(cursor.fetchall())
 		finally:
 			if cursor != None:
 				cursor.close()
 			if connection != None:
 				connection.close()
-	return json.dumps({})
+	return toJSON({})
