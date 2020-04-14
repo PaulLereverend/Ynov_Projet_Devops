@@ -2,14 +2,9 @@ from app import app
 from flask import flash, request
 from config import connect
 import json
-from flask_cors import CORS, cross_origin
-
-cors = CORS(app)
-app.config['CORS_HEADERS'] = 'Content-Type'
 
 
 @app.route('/automates', methods=['GET'])
-@cross_origin()
 def get_automates():
     if request.args.__len__() > 0:
         num_unite = request.args.get('num_unite')
