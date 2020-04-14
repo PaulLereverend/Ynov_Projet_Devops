@@ -10,18 +10,22 @@ import { HttpClient } from '@angular/common/http';
 export class ChartsComponent implements OnInit {
 
   private configUrl = 'http://localhost:5000';
-  num_unite;
+  nums_unites;
+  current_unite;
 
   constructor(private http: HttpClient) { }
 
   ngOnInit() {
     this.getUnites().subscribe((data) => {
-      this.num_unite = data;
-      console.log(this.num_unite);
+      this.nums_unites = data;
     });
   }
 
   getUnites() {
     return this.http.get(this.configUrl + '/unites');
+  }
+  setCurrentUnite(event) {
+    console.log(event);
+    this.current_unite = event.value;
   }
 }
