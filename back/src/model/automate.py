@@ -26,6 +26,7 @@ def get_automates():
 				connection.close()
 	return json.dumps({})
 
+
 @app.route('/automate/data', methods=['GET'])
 def get_data():
 	if request.args.__len__() > 0:

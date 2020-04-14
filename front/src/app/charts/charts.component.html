@@ -1,21 +1,15 @@
-<p>charts works!</p>
 <mat-form-field>
   <mat-label>Unité</mat-label>
-  <mat-select>
-    <mat-option *ngFor="let food of foods" [value]="food.value">
-      {{food.viewValue}}
+  <mat-select (selectionChange)="setCurrentUnite($event)">
+    <mat-option *ngFor="let num of nums_unites" [value]="num">
+      {{num.nom}}
     </mat-option>
   </mat-select>
 </mat-form-field>
 
-<mat-form-field>
-  <mat-label>Automates</mat-label>
-  <mat-select>
-    <mat-option *ngFor="let food of foods" [value]="food.value">
-      {{food.viewValue}}
-    </mat-option>
-  </mat-select>
-</mat-form-field>
-
-
-<temperature></temperature>
+<div *ngIf='current_unite'>
+  <h1>Données de l'unité {{current_unite.id}} - {{current_unite.nom}}</h1>
+  <div *ngFor="let automate of automates">
+    <graph [num_automate]="automate"></graph>
+  </div>
+</div>
