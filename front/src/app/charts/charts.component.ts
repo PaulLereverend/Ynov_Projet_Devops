@@ -1,11 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
-
-interface Food {
-  value: string;
-  viewValue: string;
-}
-
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-charts',
@@ -15,15 +9,19 @@ interface Food {
 
 export class ChartsComponent implements OnInit {
 
-  foods: Food[] = [
-    { value: 'steak-0', viewValue: 'Steak' },
-    { value: 'pizza-1', viewValue: 'Pizza' },
-    { value: 'tacos-2', viewValue: 'Tacos' }
-  ];
+  private configUrl = 'http://localhost:5000';
+  num_unite;
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
   ngOnInit() {
+    this.getUnites().subscribe((data) => {
+      this.num_unite = data;
+      console.log(this.num_unite);
+    });
   }
 
+  getUnites() {
+    return this.http.get(this.configUrl + '/unites');
+  }
 }

@@ -5,22 +5,24 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ChartsComponent } from './charts/charts.component';
-import { TemperatureComponent } from './charts/temperature/temperature.component';
 import { ChartsModule } from 'ng2-charts';
 import { MatSelectModule } from '@angular/material/select';
+import { GraphComponent } from './charts/graph/graph.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
     AppComponent,
     ChartsComponent,
-    TemperatureComponent
+    GraphComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     ChartsModule,
-    MatSelectModule
+    MatSelectModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
