@@ -1,4 +1,4 @@
-from automate.src.common.automate import Automate
+from common.automate import Automate
 class Unite:
 
     def __init__(self, num_unite):
