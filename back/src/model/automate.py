@@ -31,7 +31,7 @@ def get_data():
 		connection = connect()
 		try:
 			with connection.cursor() as cursor:
-				sql = "SELECT * FROM `automate` where unite_id = %s AND automate_id = %s AND date > FROM_UNIXTIME(%s)"
+				sql = "SELECT * FROM `automate` where unite_id = %s AND automate_id = %s AND date > CONVERT_TZ(FROM_UNIXTIME(%s),'+00:00','-02:00')"
 				cursor.execute(sql, (unite_id, num_automate, date_fin))
 				return toJSON(cursor.fetchall())
 		finally:
