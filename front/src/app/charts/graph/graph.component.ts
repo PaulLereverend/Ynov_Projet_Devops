@@ -13,6 +13,8 @@ export class GraphComponent implements OnInit, AfterViewInit, OnDestroy {
   private configUrl = 'http://localhost:5000';
 
   @Input() automate: any;
+  @Input() unite: number;
+
   donnes;
   loaded = false;
   sub;
@@ -30,29 +32,17 @@ export class GraphComponent implements OnInit, AfterViewInit, OnDestroy {
         time: {
           unit: 'second',
           displayFormats: {
-            second: 'SS'
+            second: 'MM:SS'
           }
         }
       }],
       yAxes: [{
         id: "y-axis-1",
         position: 'left',
-        // type: 'linear',
-        //ticks: {min: 0}
-        // scaleLabel: {
-        //   display: true,
-        //   labelString: 'Claims Count'
-        // }
       },
       {
         id: "y-axis-2",
         position: 'right',
-        // type: 'linear',
-        //ticks: {min: 0, max: 20}
-        // ticks: {
-        //   beginAtZero:true,
-        //   labelString: 'Sums Charges'
-        // }
       }]
     }
   };
@@ -66,7 +56,7 @@ export class GraphComponent implements OnInit, AfterViewInit, OnDestroy {
     this.loadGraph();
   }
   ngAfterViewInit() {
-    this.sub = interval(2000)
+    this.sub = interval(10000)
       .subscribe((val) => { this.loadGraph(); });
   }
   ngOnDestroy() {
@@ -90,16 +80,18 @@ export class GraphComponent implements OnInit, AfterViewInit, OnDestroy {
         return a.date - b.date;
       });
       data.forEach((donnee) => {
-        (tempCuve.data as ChartPoint[]).push({ t: new Date(donnee.date * 1000), y: donnee.temp_cuve } as ChartPoint);
-        (tempExterieure.data as ChartPoint[]).push({ t: new Date(donnee.date * 1000), y: donnee.temp_ext } as ChartPoint);
-        (poidLait.data as ChartPoint[]).push({ t: new Date(donnee.date * 1000), y: donnee.poids_lait } as ChartPoint);
-        (poidProduitFini.data as ChartPoint[]).push({ t: new Date(donnee.date * 1000), y: donnee.poid_produit_fini } as ChartPoint);
-        (mesurePh.data as ChartPoint[]).push({ t: new Date(donnee.date * 1000), y: donnee.mesure_ph } as ChartPoint);
-        (mesureK.data as ChartPoint[]).push({ t: new Date(donnee.date * 1000), y: donnee.mesure_kplus } as ChartPoint);
-        (concentrationNaCl.data as ChartPoint[]).push({ t: new Date(donnee.date * 1000), y: donnee.mesure_nacl } as ChartPoint);
-        (niveauSalmonelle.data as ChartPoint[]).push({ t: new Date(donnee.date * 1000), y: donnee.salmonelle } as ChartPoint);
-        (niveauEcoli.data as ChartPoint[]).push({ t: new Date(donnee.date * 1000), y: donnee.ecoli } as ChartPoint);
-        (niveauListeria.data as ChartPoint[]).push({ t: new Date(donnee.date * 1000), y: donnee.listeria } as ChartPoint);
+        const dat = new Date(donnee.date * 1000);
+        dat.setHours(dat.getHours() + 2);
+        (tempCuve.data as ChartPoint[]).push({ t: dat, y: donnee.temp_cuve } as ChartPoint);
+        (tempExterieure.data as ChartPoint[]).push({ t: dat, y: donnee.temp_ext } as ChartPoint);
+        (poidLait.data as ChartPoint[]).push({ t: dat, y: donnee.poids_lait } as ChartPoint);
+        (poidProduitFini.data as ChartPoint[]).push({ t: dat, y: donnee.poid_produit_fini } as ChartPoint);
+        (mesurePh.data as ChartPoint[]).push({ t: dat, y: donnee.mesure_ph } as ChartPoint);
+        (mesureK.data as ChartPoint[]).push({ t: dat, y: donnee.mesure_kplus } as ChartPoint);
+        (concentrationNaCl.data as ChartPoint[]).push({ t: dat, y: donnee.mesure_nacl } as ChartPoint);
+        (niveauSalmonelle.data as ChartPoint[]).push({ t: dat, y: donnee.salmonelle } as ChartPoint);
+        (niveauEcoli.data as ChartPoint[]).push({ t: dat, y: donnee.ecoli } as ChartPoint);
+        (niveauListeria.data as ChartPoint[]).push({ t: dat, y: donnee.listeria } as ChartPoint);
 
       });
       newlineChartData.push(tempCuve);
@@ -119,8 +111,9 @@ export class GraphComponent implements OnInit, AfterViewInit, OnDestroy {
   loadAutomate() {
     const start = new Date();
     start.setSeconds(start.getSeconds() - 60);
+    start.setHours(start.getHours() + 2);
     let headers = new HttpHeaders().set('Content-Type', 'application/json');
-    let params = new HttpParams().set("num_automate", this.automate.id).set("date_fin", Math.abs(start.getTime() / 1000) + '');
+    let params = new HttpParams().set("num_automate", this.automate.automate_id).set("unite_id", this.unite + '').set("date_fin", Math.round(start.getTime() / 1000) + '');
     return this.http.get(this.configUrl + '/automate/data', { params: params, headers: headers });
   }
 
