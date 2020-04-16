@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, AfterViewInit, OnDestroy } from '@angular/core';
 import { HttpHeaders, HttpParams, HttpClient } from '@angular/common/http';
 import { ChartDataSets, ChartOptions, ChartPoint } from 'chart.js';
 import { Color, Label, BaseChartDirective } from 'ng2-charts';
@@ -9,7 +9,7 @@ import { interval } from 'rxjs';
   templateUrl: './graph.component.html',
   styleUrls: ['./graph.component.css']
 })
-export class GraphComponent implements OnInit {
+export class GraphComponent implements OnInit, AfterViewInit, OnDestroy {
   private configUrl = 'http://localhost:5000';
 
   @Input() automate: any;
@@ -33,6 +33,26 @@ export class GraphComponent implements OnInit {
             second: 'SS'
           }
         }
+      }],
+      yAxes: [{
+        id: "y-axis-1",
+        position: 'left',
+        // type: 'linear',
+        //ticks: {min: 0}
+        // scaleLabel: {
+        //   display: true,
+        //   labelString: 'Claims Count'
+        // }
+      },
+      {
+        id: "y-axis-2",
+        position: 'right',
+        // type: 'linear',
+        //ticks: {min: 0, max: 20}
+        // ticks: {
+        //   beginAtZero:true,
+        //   labelString: 'Sums Charges'
+        // }
       }]
     }
   };
@@ -49,12 +69,15 @@ export class GraphComponent implements OnInit {
     this.sub = interval(2000)
       .subscribe((val) => { this.loadGraph(); });
   }
+  ngOnDestroy() {
+    this.sub.unsubscribe();
+  }
   loadGraph() {
     let newlineChartData: ChartDataSets[] = [];
     this.loadAutomate().subscribe((data: any[]) => {
       let tempCuve: ChartDataSets = { data: [], label: 'Température de la cuve' };
       let tempExterieure: ChartDataSets = { data: [], label: 'Température extérieure' };
-      let poidLait: ChartDataSets = { data: [], label: 'Poid du lait' };
+      let poidLait: ChartDataSets = { data: [], label: 'Poid du lait', yAxisID: "y-axis-2" };
       let poidProduitFini: ChartDataSets = { data: [], label: 'Poid du produit fini' };
       let mesurePh: ChartDataSets = { data: [], label: 'Mesure du PH' };
       let mesureK: ChartDataSets = { data: [], label: 'Mesure K+' };
@@ -97,7 +120,7 @@ export class GraphComponent implements OnInit {
     const start = new Date();
     start.setSeconds(start.getSeconds() - 60);
     let headers = new HttpHeaders().set('Content-Type', 'application/json');
-    let params = new HttpParams().set("num_automate", this.automate.id).set("date_fin", start.getTime() + '');
+    let params = new HttpParams().set("num_automate", this.automate.id).set("date_fin", Math.abs(start.getTime() / 1000) + '');
     return this.http.get(this.configUrl + '/automate/data', { params: params, headers: headers });
   }
 
