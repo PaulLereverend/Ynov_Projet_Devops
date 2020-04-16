@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 
 @Component({
   selector: 'app-charts',
@@ -12,6 +12,7 @@ export class ChartsComponent implements OnInit {
   private configUrl = 'http://localhost:5000';
   nums_unites;
   current_unite;
+  current_automates;
 
   constructor(private http: HttpClient) { }
 
@@ -24,8 +25,17 @@ export class ChartsComponent implements OnInit {
   getUnites() {
     return this.http.get(this.configUrl + '/unites');
   }
+  getAutomates() {
+    let headers = new HttpHeaders().set('Content-Type', 'application/json');
+    let params = new HttpParams().set("num_unite", this.current_unite.id);
+    return this.http.get(this.configUrl + '/automates', { params: params, headers: headers });
+  }
   setCurrentUnite(event) {
     console.log(event);
     this.current_unite = event.value;
+    this.getAutomates().subscribe((data) => {
+      this.current_automates = data;
+      console.log(this.current_automates);
+    })
   }
 }
