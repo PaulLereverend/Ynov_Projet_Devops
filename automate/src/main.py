@@ -1,6 +1,6 @@
 from common.unite import Unite
-import sys, json, os;
-from datetime import datetime
+import sys, json, os, time;
+import socket
 
 def run(num_unite):
     u = Unite(num_unite)
@@ -24,10 +24,19 @@ def run(num_unite):
             'bact_list' : automate.bact_list
         })
     
-    dirName = os.path.join(os.path.dirname(__file__), 'data')
-    with open(dirName+'/paramunite_'+u.num_unite+'_'+datetime.now().strftime("%d%m%Y%H%M%S")+'.json', 'w') as outfile:
+    dirPath = os.path.join(os.path.dirname(__file__), 'data')
+    fileName = 'paramunite_'+u.num_unite+'_'+time.strftime("%d%m%Y%H%M%S")+'.json'
+    with open(dirPath+'/'+fileName, 'w') as outfile:
         json.dump(data, outfile)
+    
+    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    s.connect(("", 1111))
+    s.send(fileName.encode())
+    response = s.recv(100).decode()
+    print(response)
 
 if __name__ == '__main__':
     if sys.argv.__len__() > 1:
-        run(sys.argv[1])
+        while True:
+            run(sys.argv[1])
+            time.sleep(60)
