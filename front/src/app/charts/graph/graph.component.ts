@@ -75,16 +75,16 @@ export class GraphComponent implements OnInit, AfterViewInit, OnDestroy {
   loadGraph() {
     let newlineChartData: ChartDataSets[] = [];
     this.loadAutomate().subscribe((data: any[]) => {
-      let tempCuve: ChartDataSets = { data: [], label: 'Température de la cuve' };
-      let tempExterieure: ChartDataSets = { data: [], label: 'Température extérieure' };
-      let poidLait: ChartDataSets = { data: [], label: 'Poid du lait', yAxisID: "y-axis-2" };
-      let poidProduitFini: ChartDataSets = { data: [], label: 'Poid du produit fini' };
+      let tempCuve: ChartDataSets = { data: [], label: 'Température de la cuve (°C)' };
+      let tempExterieure: ChartDataSets = { data: [], label: 'Température extérieure (°C)' };
+      let poidLait: ChartDataSets = { data: [], label: 'Poid du lait (Kg)', yAxisID: "y-axis-2" };
+      let poidProduitFini: ChartDataSets = { data: [], label: 'Poid du produit fini (Kg)' };
       let mesurePh: ChartDataSets = { data: [], label: 'Mesure du PH' };
-      let mesureK: ChartDataSets = { data: [], label: 'Mesure K+' };
-      let concentrationNaCl: ChartDataSets = { data: [], label: 'Concentration NaCl' };
-      let niveauSalmonelle: ChartDataSets = { data: [], label: 'Niveau de salmonelle' };
-      let niveauEcoli: ChartDataSets = { data: [], label: 'Niveau E-coli' };
-      let niveauListeria: ChartDataSets = { data: [], label: 'Niveau bactérien listeria' };
+      let mesureK: ChartDataSets = { data: [], label: 'Mesure K+ (mg/L)' };
+      let concentrationNaCl: ChartDataSets = { data: [], label: 'Concentration NaCl (g/L)' };
+      let niveauSalmonelle: ChartDataSets = { data: [], label: 'Niveau de salmonelle (ppm)' };
+      let niveauEcoli: ChartDataSets = { data: [], label: 'Niveau E-coli (ppm)' };
+      let niveauListeria: ChartDataSets = { data: [], label: 'Niveau bactérien listeria (ppm)' };
 
       data = data.sort(function (a, b) {
         return a.date - b.date;
