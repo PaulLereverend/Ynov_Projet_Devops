@@ -11,7 +11,7 @@ def get_automates():
 		connection = connect()
 		try:
 			with connection.cursor() as cursor:
-				sql = "SELECT * FROM `automate` where unite_id = %s"
+				sql = "SELECT DISTINCT automate_id FROM `automate` where unite_id = %s"
 				cursor.execute(sql, num_unite)
 				return toJSON(cursor.fetchall())
 		finally:
