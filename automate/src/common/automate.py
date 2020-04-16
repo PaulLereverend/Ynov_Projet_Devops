@@ -1,4 +1,4 @@
-import automate.src.common.constants as constant
+import common.constants as constant
 import random
 
 class Automate:
@@ -9,7 +9,6 @@ class Automate:
         self.degre_cuve = random.randrange(constant.DEGRE_CUVE_MIN*100, constant.DEGRE_CUVE_MAX*100, 0.1*100)/100
         self.degre_ext = random.randrange(constant.DEGRE_EXT_MIN*100, constant.DEGRE_EXT_MAX*100, 0.1*100)/100
         self.poids_lait = random.randrange(constant.POIDS_LAIT_MIN, constant.POIDS_LAIT_MAX, 1)
-        # produit fini ??
         self.ph = random.randrange(constant.PH_MIN*100, constant.PH_MAX*100, 0.1*100)/100
         self.k = random.randrange(constant.K_MIN, constant.K_MAX, 1)
         self.nacl = random.randrange(constant.NACL_MIN*100, constant.NACL_MAX*100, 0.1*100)/100

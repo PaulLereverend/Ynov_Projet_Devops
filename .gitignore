@@ -38,6 +38,12 @@ yarn-error.log
 # rollup-test output
 /modules/rollup-test/dist/
 
+# Ignore python cache files
 *.pyc
 
+# Ignore python virtual environement
 back/venv/
+automate/venv/
+
+# Ignore json automate data files
+automate/src/data/*
