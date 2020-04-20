@@ -28,7 +28,7 @@ class ClientThread(threading.Thread):
                     cursor.execute(sql_insert_unite, data['num_unite'])
                 # Insertion des données de l'unitée
                 for automate in data['automates']:
-                    sql_insert_automate = """INSERT INTO automate(
+                    sql_insert_automate = """INSERT INTO data(
                         unite_id,
                         automate_id,
                         type,
