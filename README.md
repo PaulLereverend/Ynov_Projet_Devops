@@ -9,4 +9,4 @@
 5. Install package `pip install -r requirements.txt`.
 6. Run the main `python src/main.py`
 
-`pip freeze -l > requirements.tx`
+`pip freeze -l > requirements.txt`
