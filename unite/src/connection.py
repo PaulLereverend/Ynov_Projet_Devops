@@ -16,6 +16,7 @@ def sendData(event, isRetry):
             print(response)
             if response == "Erreur lors de l'insertion des données en base" and isRetry == False:
                 sendData(event, True)
+
 if sys.argv.__len__() > 1:
     config.port = int(sys.argv[1])
     observer = Observer()
