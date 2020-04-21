@@ -1,6 +1,5 @@
 from common.unite import Unite
 import sys, json, os, time;
-import socket
 
 def run(num_unite):
     u = Unite(num_unite)
@@ -23,20 +22,13 @@ def run(num_unite):
             'bact_ecoli' : automate.bact_ecoli,
             'bact_list' : automate.bact_list
         })
-    
     dirPath = os.path.join(os.path.dirname(__file__), 'data')
-    fileName = 'paramunite_'+u.num_unite+'_'+time.strftime("%d%m%Y%H%M%S")+'.json'
+    fileName = 'paramunite_'+u.num_unite+'_'+time.time().__trunc__().__str__()+'.json'
     with open(dirPath+'/'+fileName, 'w') as outfile:
         json.dump(data, outfile)
-    
-    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    s.connect(("", 1111))
-    s.send(fileName.encode())
-    response = s.recv(100).decode()
-    print(response)
 
 if __name__ == '__main__':
     if sys.argv.__len__() > 1:
         while True:
             run(sys.argv[1])
-            time.sleep(60)
+            time.sleep(5)

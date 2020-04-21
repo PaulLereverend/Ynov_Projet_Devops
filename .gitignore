@@ -1,6 +1,7 @@
 .DS_STORE
 
-/dist/
+/dist
+dist
 /bazel-out
 /integration/bazel/bazel-*
 *.log
@@ -45,4 +46,4 @@ yarn-error.log
 */venv/
 
 # Ignore json automate data files
-automate/src/data/*
+unite/src/data/*
