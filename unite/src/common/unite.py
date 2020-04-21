@@ -8,7 +8,7 @@ class Unite:
             a = Automate(num_automate)
             while self.type_exist(a.type):
                 a = Automate(num_automate)
-            a.print_param()
+            # a.print_param()
             self.automates.append(a)
 
     def type_exist(self, type_automate):

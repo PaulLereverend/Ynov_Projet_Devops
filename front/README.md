@@ -1,3 +1,11 @@
+# Front affichant les données sous forme de courbes chartjs
+
+## Utilisation
+
+`docker build --tag {your_tag} .`
+`docker run -d -p 8080:80 {your_tag}`
+http://localhost:8080
+
 # Front
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.23.

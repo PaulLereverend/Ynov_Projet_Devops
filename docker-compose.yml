@@ -1,0 +1,38 @@
+version: '2.0'
+services:
+  unite1:
+    build: automate
+    ports:
+    - "9000:9000"
+    volumes:
+    - data:/data
+    entrypoint: /start.sh 1 9000
+  back:
+    build: back
+    ports:
+    - "5000:5000"
+  collecteur:
+    build: collecteur
+    ports:
+    - "1111:1111"
+  front:
+    build: front
+    ports:
+    - "8080:80"
+  db:
+    image: mysql:5.7
+    restart: always
+    environment:
+        MYSQL_DATABASE: 'devops'
+        MYSQL_USER: 'user'
+        MYSQL_PASSWORD: 'password'
+        MYSQL_ROOT_PASSWORD: 'password'
+    ports:
+        - '3306:3306'
+    expose:
+        - '3306'
+    volumes:
+        - my-db:/var/lib/mysql
+volumes:
+  data: {}
+  my-db: {}
