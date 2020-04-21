@@ -23,6 +23,8 @@ def run(num_unite):
             'bact_list' : automate.bact_list
         })
     dirPath = os.path.join(os.path.dirname(__file__), 'data')
+    if not os.path.exists(dirPath):
+        os.makedirs(dirPath)
     fileName = 'paramunite_'+u.num_unite+'_'+time.time().__trunc__().__str__()+'.json'
     with open(dirPath+'/'+fileName, 'w') as outfile:
         json.dump(data, outfile)
