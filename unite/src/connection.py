@@ -19,6 +19,7 @@ def sendData(event, isRetry):
 
 if sys.argv.__len__() > 1:
     config.port = int(sys.argv[1])
+    print("En écoute : si nouveau fichier")
     observer = Observer()
     event_handler = ExampleHandler() # create event handler
     # set observer to use created handler in directory
@@ -34,3 +35,5 @@ if sys.argv.__len__() > 1:
         observer.stop()
 
     observer.join()
+else:
+    print("Numéro du port en argument manquant")
