@@ -82,7 +82,6 @@ CREATE TABLE `unite` (
 --
 -- Déchargement des données de la table `unite`
 --
-
 -- Index pour les tables déchargées
 --
 

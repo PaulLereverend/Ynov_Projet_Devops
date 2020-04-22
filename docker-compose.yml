@@ -1,24 +1,26 @@
-version: '2.0'
+version: '3.0'
 services:
   unite1:
     build: unite
     ports:
     - "9000:9000"
     volumes:
-    - data:/data
-    command: /start.sh 1 9000
+    - data:/src/data
+    entrypoint: /start.sh 1 9000
+    depends_on:
+    - collecteur
   back:
     build: back
     ports:
     - "5000:5000"
     depends_on:
-    - "db"
+    - db
   collecteur:
     build: collecteur
     ports:
     - "1111:1111"
     depends_on:
-    - "db"
+    - db
   front:
     build: front
     ports:
