@@ -1,6 +1,10 @@
-import socket, threading, pathlib, json
+import socket
+import threading
+import pathlib
+import json
 from config import connect
 import config
+
 
 class ClientThread(threading.Thread):
 
@@ -12,7 +16,7 @@ class ClientThread(threading.Thread):
         self.clientsocket = clientsocket
         # print("[+] Nouveau thread pour %s %s" % (self.ip, self.port, ))
 
-    def run(self): 
+    def run(self):
         print("Connexion de %s:%s" % (self.ip, self.port, ))
 
         message = self.clientsocket.recv(999999).decode()
@@ -60,7 +64,8 @@ class ClientThread(threading.Thread):
             self.clientsocket.send('Données insérées en base'.encode())
             print('Données insérées')
         except:
-            self.clientsocket.send('Erreur lors de l\'insertion des données en base'.encode())
+            self.clientsocket.send(
+                'Erreur lors de l\'insertion des données en base'.encode())
             print('Erreur lors de l\'insertion des données en base')
         finally:
             if cursor != None:
@@ -70,10 +75,11 @@ class ClientThread(threading.Thread):
 
         print("Déconnexion de %s:%s" % (self.ip, self.port, ))
 
+
 tcpsock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 tcpsock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-tcpsock.bind((config.address,config.port))
-print("En écoute sur le port "+str(config.port))
+tcpsock.bind((config.address, config.port))
+print("En écoute à l'adresse "+str(config.address)+":"+str(config.port))
 while True:
     tcpsock.listen(10)
     (clientsocket, (ip, port)) = tcpsock.accept()
