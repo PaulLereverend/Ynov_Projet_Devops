@@ -31,7 +31,7 @@ def get_data():
 		connection = connect()
 		try:
 			with connection.cursor() as cursor:
-				sql = "SELECT * FROM data where unite_id = %s AND automate_id = %s AND date_prise > FROM_UNIXTIME(%s)"
+				sql = "SELECT * FROM data where unite_id = %s AND automate_id = %s AND date_prise > CONVERT_TZ(FROM_UNIXTIME(%s),'+00:00','-02:00')"
 				cursor.execute(sql, (unite_id, num_automate, date_fin))
 				data = cursor.fetchall()
 				for i in range(len(data)):
