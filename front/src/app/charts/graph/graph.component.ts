@@ -32,7 +32,7 @@ export class GraphComponent implements OnInit, AfterViewInit, OnDestroy {
         time: {
           unit: 'second',
           displayFormats: {
-            second: 'hh:mm:ss'
+            second: 'HH:mm:ss'
           }
         }
       }],
