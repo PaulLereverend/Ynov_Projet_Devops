@@ -32,7 +32,7 @@ export class GraphComponent implements OnInit, AfterViewInit, OnDestroy {
         time: {
           unit: 'second',
           displayFormats: {
-            second: 'MM:SS'
+            second: 'hh:mm:ss'
           }
         }
       }],
@@ -80,8 +80,7 @@ export class GraphComponent implements OnInit, AfterViewInit, OnDestroy {
         return a.date - b.date;
       });
       data.forEach((donnee) => {
-        const dat = new Date(donnee.date * 1000);
-        dat.setHours(dat.getHours() + 2);
+        const dat = new Date(donnee.date_prise * 1000);
         (tempCuve.data as ChartPoint[]).push({ t: dat, y: donnee.temp_cuve } as ChartPoint);
         (tempExterieure.data as ChartPoint[]).push({ t: dat, y: donnee.temp_ext } as ChartPoint);
         (poidLait.data as ChartPoint[]).push({ t: dat, y: donnee.poids_lait } as ChartPoint);
@@ -105,6 +104,7 @@ export class GraphComponent implements OnInit, AfterViewInit, OnDestroy {
       newlineChartData.push(niveauEcoli);
       newlineChartData.push(niveauListeria);
       this.lineChartData = newlineChartData;
+      console.log(this.lineChartData);
       this.loaded = true;
     });
   }
@@ -112,6 +112,7 @@ export class GraphComponent implements OnInit, AfterViewInit, OnDestroy {
     const start = new Date();
     start.setSeconds(start.getSeconds() - 60);
     start.setHours(start.getHours() + 2);
+
     let headers = new HttpHeaders().set('Content-Type', 'application/json');
     let params = new HttpParams().set("num_automate", this.automate.automate_id).set("unite_id", this.unite + '').set("date_fin", Math.round(start.getTime() / 1000) + '');
     return this.http.get(this.configUrl + '/automate/data', { params: params, headers: headers });
