@@ -6,35 +6,35 @@ services:
     #- "9000:9000"
     volumes:
     - data:/src/data
-    entrypoint: /start.sh 1 9001
+    entrypoint: /start.sh 1
     depends_on:
     - collecteur
   unite2:
     build: unite
     volumes:
     - data:/src/data
-    entrypoint: /start.sh 2 9002
+    entrypoint: /start.sh 2
     depends_on:
     - collecteur
   unite3:
     build: unite
     volumes:
     - data:/src/data
-    entrypoint: /start.sh 3 9003
+    entrypoint: /start.sh 3
     depends_on:
     - collecteur
   unite4:
     build: unite
     volumes:
     - data:/src/data
-    entrypoint: /start.sh 4 9004
+    entrypoint: /start.sh 4
     depends_on:
     - collecteur
   unite5:
     build: unite
     volumes:
     - data:/src/data
-    entrypoint: /start.sh 5 9005
+    entrypoint: /start.sh 5
     depends_on:
     - collecteur
   back:

@@ -27,23 +27,19 @@ def sendData(event, isRetry):
                 sendData(event, True)
 
 
-if sys.argv.__len__() > 1:
-    #config.port = int(sys.argv[1])
-    print("En écoute : si nouveau fichier")
-    observer = Observer()
-    event_handler = ExampleHandler()  # create event handler
-    # set observer to use created handler in directory
-    dirPath = os.path.join(os.path.dirname(__file__), 'data')
-    observer.schedule(event_handler, path=dirPath)
-    observer.start()
+print("En écoute : si nouveau fichier")
+observer = Observer()
+event_handler = ExampleHandler()  # create event handler
+# set observer to use created handler in directory
+dirPath = os.path.join(os.path.dirname(__file__), 'data')
+observer.schedule(event_handler, path=dirPath)
+observer.start()
 
-    # sleep until keyboard interrupt, then stop + rejoin the observer
-    try:
-        while True:
-            time.sleep(1)
-    except KeyboardInterrupt:
-        observer.stop()
+# sleep until keyboard interrupt, then stop + rejoin the observer
+try:
+    while True:
+        time.sleep(1)
+except KeyboardInterrupt:
+    observer.stop()
 
-    observer.join()
-else:
-    print("Numéro du port en argument manquant")
+observer.join()
