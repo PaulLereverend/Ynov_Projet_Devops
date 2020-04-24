@@ -32,9 +32,6 @@ def run(num_unite):
     dirPath = os.path.join(os.path.dirname(__file__), 'data')
     if not os.path.exists(dirPath):
         os.makedirs(dirPath)
-    # Move a file by renaming it's path
-    # os.rename( (tmpDirPath+'/'+fileName), (dirPath+'/'+fileName) )
-    # Move a file from the directory tmp to data
     shutil.move( (tmpDirPath+'/'+fileName), (dirPath+'/'+fileName) )
     print("file move !")
 if __name__ == '__main__':

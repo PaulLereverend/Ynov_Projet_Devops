@@ -5,35 +5,35 @@ services:
     #ports:
     #- "9000:9000"
     volumes:
-    - data:/src/data
+    - data:/src/data_1
     entrypoint: /start.sh 1
     depends_on:
     - collecteur
   unite2:
     build: unite
     volumes:
-    - data:/src/data
+    - data:/src/data_2
     entrypoint: /start.sh 2
     depends_on:
     - collecteur
   unite3:
     build: unite
     volumes:
-    - data:/src/data
+    - data:/src/data_3
     entrypoint: /start.sh 3
     depends_on:
     - collecteur
   unite4:
     build: unite
     volumes:
-    - data:/src/data
+    - data:/src/data_4
     entrypoint: /start.sh 4
     depends_on:
     - collecteur
   unite5:
     build: unite
     volumes:
-    - data:/src/data
+    - data:/src/data_5
     entrypoint: /start.sh 5
     depends_on:
     - collecteur
