@@ -1,2 +1,2 @@
-address = "collecteur"
+address = ""
 port = 1111

@@ -1,8 +1,9 @@
 from common.unite import Unite
-import sys, json, os, time, shutil;
+import sys, json, os, time;
 
 def run(num_unite):
     u = Unite(num_unite)
+    print(u.num_unite)
     
     data = {}
     data['num_unite'] = u.num_unite
@@ -21,23 +22,17 @@ def run(num_unite):
             'bact_ecoli' : automate.bact_ecoli,
             'bact_list' : automate.bact_list
         })
-    tmpDirPath = os.path.join(os.path.dirname(__file__), 'tmp')
-    if not os.path.exists(tmpDirPath):
-        os.makedirs(tmpDirPath)
-    fileName = 'paramunite_'+u.num_unite+'_'+time.time().__trunc__().__str__()+'.json'
-    with open(tmpDirPath+'/'+fileName, 'w') as outfile:
-        print("create the file : ", fileName)
-        json.dump(data, outfile)
-    
     dirPath = os.path.join(os.path.dirname(__file__), 'data')
     if not os.path.exists(dirPath):
         os.makedirs(dirPath)
-    shutil.move( (tmpDirPath+'/'+fileName), (dirPath+'/'+fileName) )
-    print("file move !")
+    fileName = 'paramunite_'+u.num_unite+'_'+time.time().__trunc__().__str__()+'.json'
+    with open(dirPath+'/'+fileName, 'w') as outfile:
+        json.dump(data, outfile)
+
 if __name__ == '__main__':
     if sys.argv.__len__() > 1:
         while True:
-            time.sleep(10)
             run(sys.argv[1])
+            time.sleep(5)
     else:
         print("Numéro d'unité en argument manquant")

@@ -1,5 +1,6 @@
 #!/bin/bash
 
-#set -e
-exec python3 -u /src/connection.py &
-exec python3 -u /src/main.py $1
+set -e
+
+exec python3 /src/main.py $1 &
+exec python3 /src/connection.py $2 &

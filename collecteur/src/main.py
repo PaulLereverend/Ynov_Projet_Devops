@@ -1,11 +1,6 @@
-import socket
-import threading
-import pathlib
-import json
+import socket, threading, pathlib, json
 from config import connect
 import config
-import signal
-import sys
 
 class ClientThread(threading.Thread):
 
@@ -17,16 +12,13 @@ class ClientThread(threading.Thread):
         self.clientsocket = clientsocket
         # print("[+] Nouveau thread pour %s %s" % (self.ip, self.port, ))
 
-    def run(self):
+    def run(self): 
         print("Connexion de %s:%s" % (self.ip, self.port, ))
 
-        message = self.clientsocket.recv(999999999).decode()
-        data = None
-        cursor = None
-        connection = None
+        message = self.clientsocket.recv(999999).decode()
+        data = json.loads(message)
+        connection = connect()
         try:
-            data = json.loads(message)
-            connection = connect()
             with connection.cursor() as cursor:
                 # Vérification / Création de l'unité
                 sql_get_unite = "SELECT * FROM `unite` where id = %s"
@@ -68,22 +60,20 @@ class ClientThread(threading.Thread):
             self.clientsocket.send('Données insérées en base'.encode())
             print('Données insérées')
         except:
-            self.clientsocket.send('error'.encode())
-            print("Unexpected error:", sys.exc_info()[0])
+            self.clientsocket.send('Erreur lors de l\'insertion des données en base'.encode())
+            print('Erreur lors de l\'insertion des données en base')
         finally:
             if cursor != None:
                 cursor.close()
             if connection != None:
                 connection.close()
-            if self.clientsocket != None:
-                self.clientsocket.close()
 
         print("Déconnexion de %s:%s" % (self.ip, self.port, ))
 
 tcpsock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 tcpsock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-tcpsock.bind((config.address, config.port))
-print("En écoute à l'adresse "+str(config.address)+":"+str(config.port))
+tcpsock.bind((config.address,config.port))
+print("En écoute sur le port "+str(config.port))
 while True:
     tcpsock.listen(10)
     (clientsocket, (ip, port)) = tcpsock.accept()
