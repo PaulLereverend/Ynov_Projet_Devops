@@ -38,7 +38,7 @@ def get_data():
 					if i-1 >= 0:
 						data[i]['poids_prod_fini'] = data[i]['poids_lait']-data[i-1]['poids_lait']
 					else:
-						data[i]['poids_prod_fini'] = -1
+						data[i]['poids_prod_fini'] = 0
 				return makeResponse(data)
 		finally:
 			if cursor != None:
