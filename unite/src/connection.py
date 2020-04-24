@@ -11,18 +11,20 @@ class ExampleHandler(FileSystemEventHandler):
     def on_created(self, event):  # when file is created
         sendData(event, False)
 
-
 def sendData(event, isRetry):
     with open(event.src_path, 'r') as outfile:
-        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        print("Connexion au collecteur à l'adresse " +
-              str(config.address) + ':' + str(config.port))
-        s.connect((config.address, config.port))
-        s.send(outfile.read().encode())
-        response = s.recv(100).decode()
-        print(response)
-        if response == "Erreur lors de l'insertion des données en base" and isRetry == False:
-            sendData(event, True)
+        fileContent = outfile.read()
+        if fileContent != "":
+            s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            s.settimeout(10)
+            print("Connexion au collecteur à l'adresse " + str(config.address) + ':' + str(config.port))
+            s.connect((config.address, config.port))
+            # print("envoie des données : ", fileContent)
+            s.send(fileContent.encode())
+            response = s.recv(100).decode()
+            print(response)
+            if response == "error" and isRetry == False:
+                sendData(event, True)
 
 
 if sys.argv.__len__() > 1:
