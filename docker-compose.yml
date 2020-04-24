@@ -1,15 +1,15 @@
 version: '3.0'
 services:
   unite1:
+    image: localhost:5000/ynov_projet_devops_unite:latest
     build: unite
-    #ports:
-    #- "9000:9000"
     volumes:
     - data:/src/data_1
     entrypoint: /start.sh 1
     depends_on:
     - collecteur
   unite2:
+    image: localhost:5000/ynov_projet_devops_unite:latest
     build: unite
     volumes:
     - data:/src/data_2
@@ -17,6 +17,7 @@ services:
     depends_on:
     - collecteur
   unite3:
+    image: localhost:5000/ynov_projet_devops_unite:latest
     build: unite
     volumes:
     - data:/src/data_3
@@ -24,6 +25,7 @@ services:
     depends_on:
     - collecteur
   unite4:
+    image: localhost:5000/ynov_projet_devops_unite:latest
     build: unite
     volumes:
     - data:/src/data_4
@@ -31,6 +33,7 @@ services:
     depends_on:
     - collecteur
   unite5:
+    image: localhost:5000/ynov_projet_devops_unite:latest
     build: unite
     volumes:
     - data:/src/data_5
@@ -38,21 +41,26 @@ services:
     depends_on:
     - collecteur
   back:
+    image: localhost:5000/ynov_projet_devops_back:latest
     build: back
     ports:
     - "5000:5000"
     depends_on:
     - db
   collecteur:
+    image: localhost:5000/ynov_projet_devops_collecteur:latest
     build: collecteur
     ports:
     - "1111:1111"
     depends_on:
     - db
   front:
+    image: localhost:5000/ynov_projet_devops_front:latest
     build: front
     ports:
     - "8080:80"
+    labels:
+      kompose.service.type: LoadBalancer
   db:
     image: mysql:5.7
     restart: always
