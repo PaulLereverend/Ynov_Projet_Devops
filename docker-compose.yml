@@ -16,6 +16,27 @@ services:
     entrypoint: /start.sh 2 9002
     depends_on:
     - collecteur
+  unite3:
+    build: unite
+    volumes:
+    - data:/src/data
+    entrypoint: /start.sh 3 9003
+    depends_on:
+    - collecteur
+  unite4:
+    build: unite
+    volumes:
+    - data:/src/data
+    entrypoint: /start.sh 4 9004
+    depends_on:
+    - collecteur
+  unite5:
+    build: unite
+    volumes:
+    - data:/src/data
+    entrypoint: /start.sh 5 9005
+    depends_on:
+    - collecteur
   back:
     build: back
     ports:

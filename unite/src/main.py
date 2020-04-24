@@ -33,6 +33,6 @@ if __name__ == '__main__':
     if sys.argv.__len__() > 1:
         while True:
             run(sys.argv[1])
-            time.sleep(5)
+            time.sleep(10)
     else:
         print("Numéro d'unité en argument manquant")
