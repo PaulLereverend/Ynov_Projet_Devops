@@ -10,7 +10,7 @@ import { interval } from 'rxjs';
   styleUrls: ['./graph.component.css']
 })
 export class GraphComponent implements OnInit, AfterViewInit, OnDestroy {
-  private configUrl = 'http://localhost:5000';
+  private configUrl = 'http://kubernetes.back';
 
   @Input() automate: any;
   @Input() unite: number;

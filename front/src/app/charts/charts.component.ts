@@ -9,7 +9,7 @@ import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 
 export class ChartsComponent implements OnInit {
 
-  private configUrl = 'http://localhost:5000';
+  private configUrl = 'http://kubernetes.back';
   nums_unites;
   current_unite;
   current_automates;
