@@ -1,0 +1,90 @@
+version: '3.0'
+services:
+  unite1:
+    image: localhost:6000/ynov_projet_devops_unite:latest
+    build: unite
+    volumes:
+    - data_1:/src/data_1
+    entrypoint: /start.sh 1
+    depends_on:
+    - collecteur
+  unite2:
+    image: localhost:6000/ynov_projet_devops_unite:latest
+    build: unite
+    volumes:
+    - data_2:/src/data_2
+    entrypoint: /start.sh 2
+    depends_on:
+    - collecteur
+  unite3:
+    image: localhost:6000/ynov_projet_devops_unite:latest
+    build: unite
+    volumes:
+    - data_3:/src/data_3
+    entrypoint: /start.sh 3
+    depends_on:
+    - collecteur
+  unite4:
+    image: localhost:6000/ynov_projet_devops_unite:latest
+    build: unite
+    volumes:
+    - data_4:/src/data_4
+    entrypoint: /start.sh 4
+    depends_on:
+    - collecteur
+  unite5:
+    image: localhost:6000/ynov_projet_devops_unite:latest
+    build: unite
+    volumes:
+    - data_5:/src/data_5
+    entrypoint: /start.sh 5
+    depends_on:
+    - collecteur
+  back:
+    image: localhost:6000/ynov_projet_devops_back:latest
+    build: back
+    ports:
+    - "0.0.0.0:5000:5000"
+    depends_on:
+    - db
+    labels:
+      kompose.service.type: NodePort
+  collecteur:
+    image: localhost:6000/ynov_projet_devops_collecteur:latest
+    build: collecteur
+    ports:
+    - "1111:1111"
+    depends_on:
+    - db
+  front:
+    image: localhost:6000/ynov_projet_devops_front:latest
+    build: front
+    ports:
+    - "8080:80"
+    depends_on:
+    - back
+    labels:
+      kompose.service.type: NodePort
+  db:
+    image: localhost:6000/ynov_projet_devops_db:latest
+    build: db
+    restart: always
+    environment:
+        MYSQL_DATABASE: 'devops'
+        MYSQL_USER: 'user'
+        MYSQL_PASSWORD: 'password'
+        MYSQL_ROOT_PASSWORD: 'password'
+    ports:
+        - '3306:3306'
+    expose:
+        - '3306'
+    volumes:
+        #- ./ynov_devops.sql:/docker-entrypoint-initdb.d/dump.sql
+        - my-db:/var/lib/mysql-data
+volumes:
+  data_1: {}
+  data_2: {}
+  data_3: {}
+  data_4: {}
+  data_5: {}
+  my-db: {}

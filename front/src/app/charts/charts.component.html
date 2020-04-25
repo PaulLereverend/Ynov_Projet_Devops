@@ -1,0 +1,15 @@
+<mat-form-field>
+  <mat-label>Unité</mat-label>
+  <mat-select (selectionChange)="setCurrentUnite($event)">
+    <mat-option *ngFor="let num of nums_unites" [value]="num">
+      {{num.id}}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+
+<div *ngIf='current_unite'>
+  <h1>Données de l'unité numéro {{current_unite.id}}</h1>
+  <div *ngFor="let automate of current_automates">
+    <graph [automate]="automate" [unite]="current_unite.id"></graph>
+  </div>
+</div>

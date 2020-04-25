@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert
+    kompose.version: 1.21.0 ()
+  creationTimestamp: null
+  labels:
+    io.kompose.service: unite1
+  name: unite1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: unite1
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert
+        kompose.version: 1.21.0 ()
+      creationTimestamp: null
+      labels:
+        io.kompose.service: unite1
+    spec:
+      containers:
+      - command:
+        - /start.sh
+        - "1"
+        image: localhost:6000/ynov_projet_devops_unite:latest
+        imagePullPolicy: ""
+        name: unite1
+        resources: {}
+        volumeMounts:
+        - mountPath: /src/data_1
+          name: data-1
+      restartPolicy: Always
+      serviceAccountName: ""
+      volumes:
+      - name: data-1
+        persistentVolumeClaim:
+          claimName: data-1
+status: {}
