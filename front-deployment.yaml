@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   annotations:
     kompose.cmd: kompose convert
-    kompose.service.type: LoadBalancer
+    kompose.service.type: NodePort
     kompose.version: 1.21.0 ()
   creationTimestamp: null
   labels:
@@ -19,14 +19,14 @@ spec:
     metadata:
       annotations:
         kompose.cmd: kompose convert
-        kompose.service.type: LoadBalancer
+        kompose.service.type: NodePort
         kompose.version: 1.21.0 ()
       creationTimestamp: null
       labels:
         io.kompose.service: front
     spec:
       containers:
-      - image: localhost:5000/ynov_projet_devops_front:latest
+      - image: localhost:6000/ynov_projet_devops_front:latest
         imagePullPolicy: ""
         name: front
         ports:

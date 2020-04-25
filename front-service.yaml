@@ -3,7 +3,7 @@ kind: Service
 metadata:
   annotations:
     kompose.cmd: kompose convert
-    kompose.service.type: LoadBalancer
+    kompose.service.type: NodePort
     kompose.version: 1.21.0 ()
   creationTimestamp: null
   labels:
@@ -16,6 +16,6 @@ spec:
     targetPort: 80
   selector:
     io.kompose.service: front
-  type: LoadBalancer
+  type: NodePort
 status:
   loadBalancer: {}

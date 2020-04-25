@@ -28,17 +28,17 @@ spec:
       - command:
         - /start.sh
         - "4"
-        image: localhost:5000/ynov_projet_devops_unite:latest
+        image: localhost:6000/ynov_projet_devops_unite:latest
         imagePullPolicy: ""
         name: unite4
         resources: {}
         volumeMounts:
         - mountPath: /src/data_4
-          name: data
+          name: data-4
       restartPolicy: Always
       serviceAccountName: ""
       volumes:
-      - name: data
+      - name: data-4
         persistentVolumeClaim:
-          claimName: data
+          claimName: data-4
 status: {}

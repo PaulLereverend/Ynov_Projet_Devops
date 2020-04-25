@@ -34,23 +34,18 @@ spec:
           value: password
         - name: MYSQL_USER
           value: user
-        image: mysql:5.7
+        image: localhost:6000/ynov_projet_devops_db:latest
         imagePullPolicy: ""
         name: db
         ports:
         - containerPort: 3306
         resources: {}
         volumeMounts:
-        - mountPath: /docker-entrypoint-initdb.d/dump.sql
-          name: db-claim0
-        - mountPath: /var/lib/mysql
+        - mountPath: /var/lib/mysql-data
           name: my-db
       restartPolicy: Always
       serviceAccountName: ""
       volumes:
-      - name: db-claim0
-        persistentVolumeClaim:
-          claimName: db-claim0
       - name: my-db
         persistentVolumeClaim:
           claimName: my-db

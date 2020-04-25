@@ -24,7 +24,7 @@ spec:
         io.kompose.service: collecteur
     spec:
       containers:
-      - image: localhost:5000/ynov_projet_devops_collecteur:latest
+      - image: localhost:6000/ynov_projet_devops_collecteur:latest
         imagePullPolicy: ""
         name: collecteur
         ports:

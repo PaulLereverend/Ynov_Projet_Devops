@@ -3,8 +3,8 @@ kind: PersistentVolumeClaim
 metadata:
   creationTimestamp: null
   labels:
-    io.kompose.service: ynov-devops.sql
-  name: ynov-devops.sql
+    io.kompose.service: data-4
+  name: data-4
 spec:
   accessModes:
   - ReadWriteOnce
