@@ -1,7 +1,7 @@
 version: '3.0'
 services:
   unite1:
-    image: localhost:5000/ynov_projet_devops_unite:latest
+    image: localhost:6000/ynov_projet_devops_unite:latest
     build: unite
     volumes:
     - data_1:/src/data_1
@@ -9,7 +9,7 @@ services:
     depends_on:
     - collecteur
   unite2:
-    image: localhost:5000/ynov_projet_devops_unite:latest
+    image: localhost:6000/ynov_projet_devops_unite:latest
     build: unite
     volumes:
     - data_2:/src/data_2
@@ -17,7 +17,7 @@ services:
     depends_on:
     - collecteur
   unite3:
-    image: localhost:5000/ynov_projet_devops_unite:latest
+    image: localhost:6000/ynov_projet_devops_unite:latest
     build: unite
     volumes:
     - data_3:/src/data_3
@@ -25,7 +25,7 @@ services:
     depends_on:
     - collecteur
   unite4:
-    image: localhost:5000/ynov_projet_devops_unite:latest
+    image: localhost:6000/ynov_projet_devops_unite:latest
     build: unite
     volumes:
     - data_4:/src/data_4
@@ -33,7 +33,7 @@ services:
     depends_on:
     - collecteur
   unite5:
-    image: localhost:5000/ynov_projet_devops_unite:latest
+    image: localhost:6000/ynov_projet_devops_unite:latest
     build: unite
     volumes:
     - data_5:/src/data_5
@@ -41,28 +41,33 @@ services:
     depends_on:
     - collecteur
   back:
-    image: localhost:5000/ynov_projet_devops_back:latest
+    image: localhost:6000/ynov_projet_devops_back:latest
     build: back
     ports:
-    - "5000:5000"
+    - "0.0.0.0:5000:5000"
     depends_on:
     - db
+    labels:
+      kompose.service.type: NodePort
   collecteur:
-    image: localhost:5000/ynov_projet_devops_collecteur:latest
+    image: localhost:6000/ynov_projet_devops_collecteur:latest
     build: collecteur
     ports:
     - "1111:1111"
     depends_on:
     - db
   front:
-    image: localhost:5000/ynov_projet_devops_front:latest
+    image: localhost:6000/ynov_projet_devops_front:latest
     build: front
     ports:
     - "8080:80"
+    depends_on:
+    - back
     labels:
-      kompose.service.type: LoadBalancer
+      kompose.service.type: NodePort
   db:
-    image: mysql:5.7
+    image: localhost:6000/ynov_projet_devops_db:latest
+    build: db
     restart: always
     environment:
         MYSQL_DATABASE: 'devops'
@@ -74,8 +79,8 @@ services:
     expose:
         - '3306'
     volumes:
-        - ./ynov_devops.sql:/docker-entrypoint-initdb.d/dump.sql
-        - my-db:/var/lib/mysql
+        #- ./ynov_devops.sql:/docker-entrypoint-initdb.d/dump.sql
+        - my-db:/var/lib/mysql-data
 volumes:
   data_1: {}
   data_2: {}
