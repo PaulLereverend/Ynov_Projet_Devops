@@ -33,7 +33,7 @@ spec:
         name: unite3
         resources: {}
         volumeMounts:
-        - mountPath: /src/data_3
+        - mountPath: /src/data
           name: data-3
       restartPolicy: Always
       serviceAccountName: ""
