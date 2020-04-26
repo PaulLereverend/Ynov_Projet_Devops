@@ -21,6 +21,10 @@ back -> http://localhost:5000/
 
 ## Kubernetes (avec minikube)
 
+Installation de minikube (MacOS)
+```
+brew update && brew install kubectl && brew cask install docker virtualbox && brew install minikube
+```
 Démarrage de la VM
 ```
 minikube start
