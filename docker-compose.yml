@@ -4,7 +4,7 @@ services:
     image: localhost:6000/ynov_projet_devops_unite:latest
     build: unite
     volumes:
-    - data_1:/src/data_1
+    - data_1:/src/data
     entrypoint: /start.sh 1
     depends_on:
     - collecteur
@@ -12,7 +12,7 @@ services:
     image: localhost:6000/ynov_projet_devops_unite:latest
     build: unite
     volumes:
-    - data_2:/src/data_2
+    - data_2:/src/data
     entrypoint: /start.sh 2
     depends_on:
     - collecteur
@@ -20,7 +20,7 @@ services:
     image: localhost:6000/ynov_projet_devops_unite:latest
     build: unite
     volumes:
-    - data_3:/src/data_3
+    - data_3:/src/data
     entrypoint: /start.sh 3
     depends_on:
     - collecteur
@@ -28,7 +28,7 @@ services:
     image: localhost:6000/ynov_projet_devops_unite:latest
     build: unite
     volumes:
-    - data_4:/src/data_4
+    - data_4:/src/data
     entrypoint: /start.sh 4
     depends_on:
     - collecteur
@@ -36,7 +36,7 @@ services:
     image: localhost:6000/ynov_projet_devops_unite:latest
     build: unite
     volumes:
-    - data_5:/src/data_5
+    - data_5:/src/data
     entrypoint: /start.sh 5
     depends_on:
     - collecteur
