@@ -31,11 +31,11 @@ export class ChartsComponent implements OnInit {
     return this.http.get(this.configUrl + '/automates', { params: params, headers: headers });
   }
   setCurrentUnite(event) {
-    console.log(event);
+    // console.log(event);
     this.current_unite = event.value;
     this.getAutomates().subscribe((data) => {
       this.current_automates = data;
-      console.log(this.current_automates);
+      // console.log(this.current_automates);
     })
   }
 }

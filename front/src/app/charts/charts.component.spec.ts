@@ -1,25 +1,30 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ChartsComponent } from './charts.component';
+import { MatSelectModule } from '@angular/material/select';
+import { ChartsModule } from 'ng2-charts';
+import { GraphComponent } from './graph/graph.component';
+import { HttpClientModule } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('ChartsComponent', () => {
-  let component: ChartsComponent;
-  let fixture: ComponentFixture<ChartsComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ ChartsComponent ]
-    })
-    .compileComponents();
-  }));
+    beforeEach(async(() => {
+        TestBed.configureTestingModule({
+            imports: [
+                MatSelectModule,
+                ChartsModule,
+                HttpClientModule,
+                BrowserAnimationsModule,
+            ],
+            declarations: [ ChartsComponent, GraphComponent ]
+        })
+        .compileComponents();
+    }));
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(ChartsComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
-
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+    it('should create the ChartsComponent', () => {
+        const fixture = TestBed.createComponent(ChartsComponent);
+        const cc = fixture.debugElement.componentInstance;
+        expect(cc).toBeTruthy();
+    });
 });
