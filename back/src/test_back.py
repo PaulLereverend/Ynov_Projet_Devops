@@ -1,6 +1,6 @@
 import pytest
 from config import connect
-import model.automate as auto
+import model.automate
 import model.unite
 from app import app
 
@@ -28,5 +28,5 @@ def test_automate_data():
 
 def test_unite():
     with app.test_client() as c:
-        response = c.get('/automates')
+        response = c.get('/unites')
         assert response.status_code == 200
