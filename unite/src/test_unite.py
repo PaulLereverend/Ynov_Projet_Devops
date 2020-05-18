@@ -1,16 +1,18 @@
 from common.unite import Unite
 from common.automate import Automate
 
+
 class TestUnite:
     def test_num_unite(self):
         assert u.num_unite >= 1 and u.num_unite <= 5
+
 
 class TestAutomate:
     def test_num_automate(self):
         for auto in u.automates:
             print(auto.num_automate)
-            assert auto.num_automate >= 1 and auto.num_automate <= 10
-    
+            assert auto.num_automate >= 1 and auto.num_automate <= 2
+
     def test_type_automate(self):
         for auto in u.automates:
             print(auto.type)
@@ -25,5 +27,6 @@ class TestAutomate:
         for auto in u.automates:
             print(auto.poids_lait)
             assert auto.poids_lait >= 0.0 and auto.poids_lait < 10000.0
+
 
 u = Unite(2)
