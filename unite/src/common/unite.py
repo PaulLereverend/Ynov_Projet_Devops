@@ -4,7 +4,7 @@ class Unite:
     def __init__(self, num_unite):
         self.num_unite = num_unite
         self.automates = []
-        for num_automate in range(10):
+        for num_automate in range(1, 11):
             a = Automate(num_automate)
             while self.type_exist(a.type):
                 a = Automate(num_automate)
