@@ -12,3 +12,9 @@ L'observateur va regarder s'il y a un nouveau fichier de données et par la suit
 ```
 python3 src/connection.py
 ```
+
+## Tests
+
+```
+pytest
+```
