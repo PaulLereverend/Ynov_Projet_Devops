@@ -4,6 +4,26 @@ Ce projet est porté par les étudiants suivants :
 - Hugo HUET
 - Paul LEREVEREND
 
+# Definition of done
+
+### Partie 1: Terminée
+* ✔ Automates écrivant les données dans un fichier json
+* ✔ Script lisant les fichiers et insérant le données dans la bdd	
+* ✔ Back permettant d’interroger la bdd	
+* ✔ Front permettant d’afficher les données sur une plage de 60 min glissant	
+* ✔ Conteneurs suivant schéma d’archi	
+* ✔ Orchestrateur kubernetes 
+### Partie 2: A présenter
+* ✔ Tests Unitaires automatiques
+* ✔ Déploiement automatique	
+* ✔ Pipelines de récupération des sources sur le repository github
+### Partie 3: En cours
+* Schéma de bdd scalable
+* Création des utilisateurs
+* Base de donnée compressée
+* Dump quotidien de la base
+
+
 # Documentation
 Une documentation pour chaque service est présent au sein de leurs dossiers respectifs.
 
@@ -14,8 +34,8 @@ Nous avons décidé que nos commit auraient cette forme-ci :
 ## Gestion de configuration
 Voici la configuration de notre git :
 1. Master/prod
-    1. pre-prod
-        1. develop
+    1. pre-prod -> configurations docker/kubernetes
+        1. develop -> configurations local
             1. back
             2. front
             3. unite
