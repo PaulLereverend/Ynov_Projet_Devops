@@ -11,7 +11,7 @@ class TestAutomate:
     def test_num_automate(self):
         for auto in u.automates:
             print(auto.num_automate)
-            assert auto.num_automate >= 1 and auto.num_automate <= 2
+            assert auto.num_automate >= 1 and auto.num_automate <= 10
 
     def test_type_automate(self):
         for auto in u.automates:
