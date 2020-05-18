@@ -1,4 +1,5 @@
-# Backend
+# Collecteur
+
 ## Installation
 
 1. Clone this repository
@@ -7,12 +8,6 @@
 4. Go into "project": `cd project`.
 5. Install package `pip install -r requirements.txt`.
 6. Run the main `python src/main.py`
-
-## Utilisation
-
-`docker build --tag {your_tag} .`
-`docker run -d -p 5000:5000 {your_tag}`
-http://localhost:5000
 
 ## Tests
 
