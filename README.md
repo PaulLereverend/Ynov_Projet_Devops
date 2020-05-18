@@ -7,6 +7,21 @@ Ce projet est porté par les étudiants suivants :
 # Documentation
 Une documentation pour chaque service est présent au sein de leurs dossiers respectifs.
 
+## Gestion des commits
+Nous avons décidé que nos commit auraient cette forme-ci :
+`(feature) : (ajout,update,delete...)+(sujet du commit)`
+
+## Gestion de configuration
+Voici la configuration de notre git :
+1. Master/prod
+    1. pre-prod
+        1. develop
+            1. back
+            2. front
+            3. unite
+            4. collecteur
+            5. docker
+
 # Utilisation
 
 ## Docker
