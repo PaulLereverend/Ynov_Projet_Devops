@@ -28,15 +28,43 @@ class ClientThread(threading.Thread):
             data = json.loads(message)
             connection = connect()
             with connection.cursor() as cursor:
-                # Vérification / Création de l'unité
-                sql_get_unite = "SELECT * FROM `unite` where id = %s"
-                cursor.execute(sql_get_unite, data['num_unite'])
-                if cursor.fetchone() == None:
-                    sql_insert_unite = "INSERT INTO unite(id, site_id) VALUES (%s, 1)"
-                    cursor.execute(sql_insert_unite, data['num_unite'])
+                isValid = True
+                num_unite = int(data['num_unite'])
+                if num_unite < 1 or num_unite > 5:
+                    isValid = False
+                else:
+                    for auto in data['automates']:
+                        if (auto['num_automate'] < 1 or auto['num_automate'] > 10):
+                            print("ERROR num_automate : "+auto['num_automate'])
+                            isValid = False
+                            break
+                        if (auto['type'] < 47648 or auto['type'] > 47663):
+                            print("ERROR type : "+str(auto['type']))
+                            isValid = False
+                            break
+                        if (auto['degre_cuve'] < 0.0 or auto['degre_cuve'] > 100.0):
+                            print("ERROR degre_cuve : "+str(auto['degre_cuve']))
+                            isValid = False
+                            break
+                        if (auto['poids_lait'] < 0.0 or auto['poids_lait'] > 10000.0):
+                            print("ERROR poids_lait : "+str(auto['poids_lait']))
+                            isValid = False
+                            break
+                
+                if isValid == True:
+                    # Vérification / Création de l'unité
+                    sql_get_unite = "SELECT * FROM `unite` where id = %s"
+                    cursor.execute(sql_get_unite, data['num_unite'])
+                    if cursor.fetchone() == None:
+                        sql_insert_unite = "INSERT INTO unite(id, site_id) VALUES (%s, 1)"
+                        cursor.execute(sql_insert_unite, data['num_unite'])
                 # Insertion des données de l'unitée
+                if isValid == True:
+                    table = 'data'
+                else:
+                    table = 'data_error'
                 for automate in data['automates']:
-                    sql_insert_automate = """INSERT INTO data(
+                    sql_insert_automate = "INSERT INTO "+table+"""(
                         unite_id,
                         automate_id,
                         type,
@@ -66,10 +94,10 @@ class ClientThread(threading.Thread):
                     ))
             connection.commit()
             self.clientsocket.send('Données insérées en base'.encode())
-            print('Données insérées')
+            print('Données insérées : '+table)
         except:
             self.clientsocket.send('error'.encode())
-            print("Unexpected error:", sys.exc_info()[0])
+            print("Unexpected error:", sys.exc_info())
         finally:
             if cursor != None:
                 cursor.close()
