@@ -71,8 +71,6 @@ services:
     restart: always
     environment:
         MYSQL_DATABASE: 'devops'
-        MYSQL_USER: 'user'
-        MYSQL_PASSWORD: 'password'
         MYSQL_ROOT_PASSWORD: 'password'
     ports:
         - '3306:3306'
