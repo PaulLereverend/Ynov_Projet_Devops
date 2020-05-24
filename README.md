@@ -42,6 +42,13 @@ Voici la configuration de notre git :
             4. collecteur
             5. docker
 
+## A faire avant de merge sur master
+
+- [ ] Lancer les tests unitaires
+- [ ] Faire un déploiement sur la pré-prod
+- [ ] Mettre à jour le changelog
+- [ ] Prévenir les clients
+
 # Utilisation
 
 ## Docker
