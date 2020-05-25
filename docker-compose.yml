@@ -87,7 +87,7 @@ services:
     volumes:
         #- ./ynov_devops.sql:/docker-entrypoint-initdb.d/dump.sql
         - my-db:/var/lib/mysql-data
-  collecteur:
+  backup_db:
     image: localhost:6000/ynov_projet_devops_backup_db:latest
     build: backup_db
     ports:
