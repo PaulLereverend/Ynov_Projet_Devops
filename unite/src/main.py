@@ -34,12 +34,12 @@ def run(num_unite):
         os.makedirs(dirPath)
     
     list_file = os.listdir(dirPath)
-    if list_file.__len__() > 10:
-        file_to_remove_name = list_file[0]
-        os.remove(dirPath+'/'+file_to_remove_name)
+    if list_file.__len__() > 9:
+        os.remove(dirPath+'/'+list_file[0])
 
     shutil.move( (tmpDirPath+'/'+fileName), (dirPath+'/'+fileName) )
     print("file move !")
+
 if __name__ == '__main__':
     if sys.argv.__len__() > 1:
         while True:
