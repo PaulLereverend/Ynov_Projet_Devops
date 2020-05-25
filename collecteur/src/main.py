@@ -114,7 +114,7 @@ def send_mail(num_unite, data_automate):
     msg.set_content("""\
     Bonjour,
 
-    Une erreur a été dédecté :
+    Une erreur a été détectée :
 
     Unité : """+num_unite+"""
     Numéro d'automate : """+str(data_automate['num_automate'])+"""
