@@ -1,6 +1,6 @@
 port = 1111
 db_type = "mariadb"
-user = "user"
-password = "password"
+user = "back"
+password = "backpwd"
 host="db"
 database="devops"
