@@ -32,6 +32,12 @@ def run(num_unite):
     dirPath = os.path.join(os.path.dirname(__file__), 'data')
     if not os.path.exists(dirPath):
         os.makedirs(dirPath)
+    
+    list_file = os.listdir(dirPath)
+    if list_file.__len__() > 10:
+        file_to_remove_name = list_file[0]
+        os.remove(dirPath+'/'+file_to_remove_name)
+
     shutil.move( (tmpDirPath+'/'+fileName), (dirPath+'/'+fileName) )
     print("file move !")
 if __name__ == '__main__':
