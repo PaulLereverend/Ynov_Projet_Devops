@@ -40,6 +40,14 @@ services:
     entrypoint: /start.sh 5
     depends_on:
     - collecteur
+  unite6:
+    image: localhost:6000/ynov_projet_devops_unite:latest
+    build: unite
+    volumes:
+    - data_6:/src/data
+    entrypoint: /start.sh 6
+    depends_on:
+    - collecteur
   back:
     image: localhost:6000/ynov_projet_devops_back:latest
     build: back
@@ -85,4 +93,5 @@ volumes:
   data_3: {}
   data_4: {}
   data_5: {}
+  data_6: {}
   my-db: {}

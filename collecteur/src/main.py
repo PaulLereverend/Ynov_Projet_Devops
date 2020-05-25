@@ -87,8 +87,11 @@ class ClientThread(threading.Thread):
                         automate['bact_ecoli'],
                         automate['bact_list']
                     ))
-                    if table == 'data_error':
+                    if table == 'data_error' and isValid == True:
                         send_mail(data['num_unite'], automate)
+                        
+                if isValid == False:
+                    send_mail(data['num_unite'], automate)
             connection.commit()
 
             self.clientsocket.send('Données insérées en base'.encode())
