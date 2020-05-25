@@ -94,7 +94,7 @@ services:
     - "1111:1111"
     depends_on:
     - db
-  volumes:
+    volumes:
     - backups:/backups
 volumes:
   data_1: {}
