@@ -13,15 +13,15 @@ Ce projet est porté par les étudiants suivants :
 * ✔ Front permettant d’afficher les données sur une plage de 60 min glissant	
 * ✔ Conteneurs suivant schéma d’archi	
 * ✔ Orchestrateur kubernetes 
-### Partie 2: A présenter
+### Partie 2: Terminée
 * ✔ Tests Unitaires automatiques
 * ✔ Déploiement automatique	
 * ✔ Pipelines de récupération des sources sur le repository github
 ### Partie 3: En cours
-* Schéma de bdd scalable
-* Création des utilisateurs
+* ✔ Schéma de bdd scalable
+* ✔ Création des utilisateurs
 * Base de donnée compressée
-* Dump quotidien de la base
+* ✔ Dump quotidien de la base
 
 
 # Documentation
