@@ -133,7 +133,7 @@ def send_mail(num_unite, data_automate):
     Ce message a été généré automatiquement, merci de ne pas y répondre.""")
     msg['Subject'] = 'Erreur unité '+num_unite+' automate '+str(data_automate['num_automate'])
     msg['From'] = 'devopsaubonbeurre@gmail.com'
-    msg['To'] = 'hugo.huet@ynov.com'
+    msg['To'] = 'paul.lereverend@ynov.com'
 
     s = smtplib.SMTP_SSL('smtp.gmail.com', '465')
     s.ehlo()
