@@ -23,6 +23,7 @@ Ce projet est porté par les étudiants suivants :
 * Base de donnée compressée
 * ✔ Dump quotidien de la base
 
+demo
 
 # Documentation
 Une documentation pour chaque service est présent au sein de leurs dossiers respectifs.
