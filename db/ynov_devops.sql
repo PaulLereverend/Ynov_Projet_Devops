@@ -33,7 +33,7 @@ CREATE TABLE `data` (
   `unite_id` int(11) DEFAULT NULL,
   `automate_id` int(11) DEFAULT NULL,
   `nom` varchar(255) DEFAULT NULL,
-  `type` bigint(20) DEFAULT NULL,
+  `type` bigint(20) DEFAULT 4294967295,
   `date_prise` timestamp NOT NULL DEFAULT current_timestamp(),
   `temp_cuve` float DEFAULT 99.99,
   `temp_ext` float DEFAULT 99.99,
@@ -48,6 +48,35 @@ CREATE TABLE `data` (
 
 --
 -- Déchargement des données de la table `data`
+--
+-- --------------------------------------------------------
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `data_error`
+--
+
+CREATE TABLE `data_error` (
+  `id` int(11) NOT NULL,
+  `unite_id` int(11) DEFAULT NULL,
+  `automate_id` int(11) DEFAULT NULL,
+  `nom` varchar(255) DEFAULT NULL,
+  `type` bigint(20) DEFAULT NULL,
+  `date_prise` timestamp NOT NULL DEFAULT current_timestamp(),
+  `temp_cuve` float DEFAULT NULL,
+  `temp_ext` float DEFAULT NULL,
+  `poids_lait` float DEFAULT NULL,
+  `mesure_ph` float DEFAULT NULL,
+  `mesure_kplus` int(11) DEFAULT NULL,
+  `mesure_nacl` float DEFAULT NULL,
+  `salmonelle` int(11) DEFAULT NULL,
+  `ecoli` int(11) DEFAULT NULL,
+  `listeria` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Déchargement des données de la table `data_error`
 --
 -- --------------------------------------------------------
 
@@ -147,3 +176,12 @@ COMMIT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+CREATE USER 'admindel'@'%' IDENTIFIED BY 'admindelpwd';
+GRANT ALL PRIVILEGES ON devops.* TO 'admindel'@'%';
+
+CREATE USER 'collecteur'@'%' IDENTIFIED BY 'collecteurpwd';
+GRANT INSERT, SELECT, UPDATE ON devops.* TO 'collecteur'@'%';
+
+CREATE USER 'back'@'%' IDENTIFIED BY 'backpwd';
+GRANT SELECT ON devops.* TO 'back'@'%';

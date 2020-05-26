@@ -32,8 +32,14 @@ def run(num_unite):
     dirPath = os.path.join(os.path.dirname(__file__), 'data')
     if not os.path.exists(dirPath):
         os.makedirs(dirPath)
+    
+    list_file = os.listdir(dirPath)
+    if list_file.__len__() > 9:
+        os.remove(dirPath+'/'+list_file[0])
+
     shutil.move( (tmpDirPath+'/'+fileName), (dirPath+'/'+fileName) )
     print("file move !")
+
 if __name__ == '__main__':
     if sys.argv.__len__() > 1:
         while True:

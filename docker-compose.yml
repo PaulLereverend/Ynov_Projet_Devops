@@ -40,6 +40,14 @@ services:
     entrypoint: /start.sh 5
     depends_on:
     - collecteur
+  unite6:
+    image: localhost:6000/ynov_projet_devops_unite:latest
+    build: unite
+    volumes:
+    - data_6:/src/data
+    entrypoint: /start.sh 6
+    depends_on:
+    - collecteur
   back:
     image: localhost:6000/ynov_projet_devops_back:latest
     build: back
@@ -71,8 +79,6 @@ services:
     restart: always
     environment:
         MYSQL_DATABASE: 'devops'
-        MYSQL_USER: 'user'
-        MYSQL_PASSWORD: 'password'
         MYSQL_ROOT_PASSWORD: 'password'
     ports:
         - '3306:3306'
@@ -81,10 +87,19 @@ services:
     volumes:
         #- ./ynov_devops.sql:/docker-entrypoint-initdb.d/dump.sql
         - my-db:/var/lib/mysql-data
+  backup_db:
+    image: localhost:6000/ynov_projet_devops_backup_db:latest
+    build: backup_db
+    depends_on:
+    - db
+    volumes:
+    - backups:/backups
 volumes:
   data_1: {}
   data_2: {}
   data_3: {}
   data_4: {}
   data_5: {}
+  data_6: {}
   my-db: {}
+  backups: {}
