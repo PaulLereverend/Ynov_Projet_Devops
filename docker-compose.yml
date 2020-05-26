@@ -90,8 +90,6 @@ services:
   backup_db:
     image: localhost:6000/ynov_projet_devops_backup_db:latest
     build: backup_db
-    ports:
-    - "1111:1111"
     depends_on:
     - db
     volumes:
